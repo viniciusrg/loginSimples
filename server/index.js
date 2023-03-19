@@ -2,6 +2,8 @@ const express = require('express');
 const app = express();
 const mysql = require('mysql');
 var cors = require('cors');
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 const db = mysql.createPool({
     host: "br286.hostgator.com.br",
@@ -22,17 +24,19 @@ app.post("/register", (req, res) => {
             res.send(err);
         }
         if (result.length == 0) {
+            bcrypt.hash(password, saltRounds, (err, hash) => {
 
-            db.query(
-                "INSERT INTO usuario (email, password) VALUE (?,?)",
-                [email, password],
-                (error, response) => {
-                    if (err) {
-                        res.send(err);
+                db.query(
+                    "INSERT INTO usuario (email, password) VALUE (?,?)",
+                    [email, hash],
+                    (error, response) => {
+                        if (err) {
+                            res.send(err);
+                        }
+                        res.send({ msg: "Usuário cadastrado com sucesso" });
                     }
-                    res.send({ msg: "Usuário cadastrado com sucesso" });
-                }
-            );
+                );
+            })
 
         } else {
             res.send({ msg: "Email já cadastrado" });
@@ -40,8 +44,28 @@ app.post("/register", (req, res) => {
     });
 });
 
-// Login https://www.youtube.com/watch?v=F_mXVI8Dalg&ab_channel=VitorCunhaCode
-// 44:40min
+app.post("/login", (req, res) => {
+    const email = req.body.email;
+    const password = req.body.password;
+
+    db.query("SELECT * FROM usuario WHERE email = ?", [email], (err, result) => {
+        if (err) {
+            res.send(err);
+        }
+        if (result.length > 0) {
+            bcrypt.compare(password, result[0].password, (erro, result)=>{
+                if (result){
+                    res.send({ msg: "Usuário logado com sucesso!", login: true })
+                }else{
+                    res.send({ msg: "Senha incorreta!", login: false })
+                }
+            })
+            
+        } else {
+            res.send({ msg: "Conta não encontrada!" })
+        }
+    })
+})
 
 app.listen(3001, () => {
     console.log('3001')

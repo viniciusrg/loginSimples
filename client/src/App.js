@@ -22,7 +22,17 @@ function App() {
   })
 
   const handleClickLogin = (values) => {
-
+    Axios.post("http://localhost:3001/login", {
+      email: values.email,
+      password: values.password,
+    }).then((response)=>{
+      console.log(response)
+      if (response.data.login){
+        console.log("Logado");
+      }else{
+        console.log("Erro ao logar");
+      }
+    })
   }
 
   const validationLogin = yup.object().shape({
