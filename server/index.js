@@ -6,10 +6,10 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
 const db = mysql.createPool({
-    host: "br286.hostgator.com.br",
-    user: "vrgoul65_root",
-    password: "59bo6yZM[m[m",
-    database: "vrgoul65_LoginSimples",
+    host: "", //Seu hostname.
+    user: "", //Seu usuário.
+    password: "", //Sua senha.
+    database: "", //Nome do seu banco de dados.
 });
 
 app.use(express.json());
