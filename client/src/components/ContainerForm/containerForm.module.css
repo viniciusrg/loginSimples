@@ -1,0 +1,59 @@
+.containerForm{
+    width: 40%;
+    height: 100vh;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media (max-width: 768px) {
+    .containerForm{
+        width: 100%;
+    }
+}
+
+.containerFormGroup{
+    color: var(--cor-texto);
+    width: 60%;
+}
+
+.formGroup{
+    position: relative;
+}
+
+.form{
+    margin: 1rem 0rem;
+}
+
+.formField{
+    border: none;
+    border-bottom: 1px solid var(--cor-borda);
+    width: 100%;
+    font-size: .9rem;
+    line-height: 2rem;
+    margin: 1rem 0rem;
+    box-sizing: border-box;
+    padding: 0rem .5rem;
+    transition: .1s;
+    background-color: inherit;
+}
+
+.formField:focus{
+    outline: 2px solid var(--cor-link);
+    border-radius: .3rem;
+}
+
+.esqueceuSenha{
+    margin-top: .8rem;
+}
+
+.containerForm .formError{
+    color: var(--cor-erro);
+    font-size: .8rem;
+    margin: 0px;
+    position: absolute;
+    bottom: -.5rem;
+    left: 0rem;
+
+}

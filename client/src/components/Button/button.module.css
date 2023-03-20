@@ -1,0 +1,18 @@
+.button{
+    background-color: var(--cor-link);
+    color: var(--cor-branco);
+    font-size: 1rem;
+    font-weight: bold;
+    width: 100%;
+    line-height: 2.8rem;
+    border: none;
+    border-radius: .5rem;
+    margin: 1.5rem 0rem;
+    box-shadow: var(--sombra);
+    transition: .5s;
+    cursor: pointer;
+}
+
+.button:hover{
+    background-color: var(--cor-link-claro);
+}

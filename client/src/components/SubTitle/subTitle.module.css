@@ -1,0 +1,14 @@
+.subTitle *{
+    margin: .5rem 0rem;
+    color: var(--cor-texto);
+    font-size: .8rem;
+}
+
+.subTitle b{
+    color: var(--cor-link);
+    cursor: pointer;
+}
+
+.subTitle b:hover{
+    color: var(--cor-link-claro);
+}
